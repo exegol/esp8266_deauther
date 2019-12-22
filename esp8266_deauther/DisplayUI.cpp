@@ -50,6 +50,10 @@ void DisplayUI::drawLine(int x1, int y1, int x2, int y2) {
     display.drawLine(x1, y1, x2, y2);
 }
 
+void DisplayUI::drawPixel(int x, int y) {
+    display.setPixel(x, y);
+}
+
 // ====================== //
 
 
@@ -78,7 +82,7 @@ void DisplayUI::setup() {
             mode = DISPLAY_MODE::PACKETMONITOR;
         });
         
-        addMenuNode(&mainMenu, D_CLOCK, [this]() { // PACKET MONITOR
+        addMenuNode(&mainMenu, D_CLOCK, [this]() { // CLOCK
             mode = DISPLAY_MODE::CLOCK;
             display.setFont(ArialMT_Plain_24);
             display.setTextAlignment(TEXT_ALIGN_CENTER);
@@ -90,6 +94,12 @@ void DisplayUI::setup() {
             digitalWrite(HIGHLIGHT_LED, highlightLED);
         });
 #endif // ifdef HIGHLIGHT_LED
+        
+        addMenuNode(&mainMenu, D_WARLORD, [this]() { // WARLORD
+            mode = DISPLAY_MODE::WARLORD;
+            display.setFont(ArialMT_Plain_24);
+            display.setTextAlignment(TEXT_ALIGN_CENTER);
+        });
     });
 
     // SCAN MENU
@@ -630,6 +640,8 @@ void DisplayUI::setupButtons() {
                 break;
 
             case DISPLAY_MODE::CLOCK:
+            case DISPLAY_MODE::WARLORD:
+            case DISPLAY_MODE::SNAKE:
                 mode = DISPLAY_MODE::MENU;
                 display.setFont(DejaVu_Sans_Mono_12);
                 display.setTextAlignment(TEXT_ALIGN_LEFT);
@@ -683,8 +695,11 @@ void DisplayUI::draw() {
         case DISPLAY_MODE::CLOCK:
             drawClock();
             break;
+        
+        case DISPLAY_MODE::WARLORD:
+            drawWarlord();
+            break;
         }
-
         updateSuffix();
     }
 }
@@ -787,6 +802,11 @@ void DisplayUI::drawClock() {
     clockTime += String(clockMinute);
 
     display.drawString(64, 20, clockTime);
+}
+
+void DisplayUI::drawWarlord() {
+    
+    display.drawString(64, 20, str(D_WARLORD));
 }
 
 void DisplayUI::clearMenu(Menu* menu) {

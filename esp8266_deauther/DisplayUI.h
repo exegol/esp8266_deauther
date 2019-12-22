@@ -30,8 +30,8 @@ extern String leftRight(String a, String b, int len);
 extern String replaceUtf8(String str, String r);
 
 const char D_INTRO_0[] PROGMEM = "";
-const char D_INTRO_1[] PROGMEM = "ESP8266 Deauther";
-const char D_INTRO_2[] PROGMEM = "by @Spacehuhn";
+const char D_INTRO_1[] PROGMEM = "Warlord Deauther";
+const char D_INTRO_2[] PROGMEM = "tx to @Spacehuhn";
 const char D_INTRO_3[] PROGMEM = "";
 
 // fallback for the buttons
@@ -66,7 +66,7 @@ struct Menu {
 
 class DisplayUI {
     public:
-        enum DISPLAY_MODE { OFF = 0, BUTTON_TEST = 1, MENU = 2, LOADSCAN = 3, PACKETMONITOR = 4, INTRO = 5, CLOCK = 6 };
+        enum DISPLAY_MODE { OFF = 0, BUTTON_TEST = 1, MENU = 2, LOADSCAN = 3, PACKETMONITOR = 4, INTRO = 5, CLOCK = 6, WARLORD = 7, SNAKE = 8 };
 
         uint8_t mode      = DISPLAY_MODE::MENU;
         bool highlightLED = false;
@@ -96,6 +96,7 @@ class DisplayUI {
         void drawString(int x, int y, String str);
         void drawString(int row, String str);
         void drawLine(int x1, int y1, int x2, int y2);
+        void drawPixel(int x, int y);
         // ====================== //
 
         DisplayUI();
@@ -157,6 +158,8 @@ class DisplayUI {
         void drawLoadingScan();
         void drawPacketMonitor();
         void drawIntro();
+        void drawWarlord();
+        
         void clearMenu(Menu* menu);
 
         // menu functions
