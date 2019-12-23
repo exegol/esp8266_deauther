@@ -601,9 +601,11 @@ void DisplayUI::setupButtons() {
                 break;
 
             case DISPLAY_MODE::CLOCK:
+            case DISPLAY_MODE::WARLORD:
                 mode = DISPLAY_MODE::MENU;
                 display.setFont(DejaVu_Sans_Mono_12);
                 display.setTextAlignment(TEXT_ALIGN_LEFT);
+                led.setColor(0,255,0, true);
                 break;
             }
         }
@@ -645,6 +647,7 @@ void DisplayUI::setupButtons() {
                 mode = DISPLAY_MODE::MENU;
                 display.setFont(DejaVu_Sans_Mono_12);
                 display.setTextAlignment(TEXT_ALIGN_LEFT);
+                led.setColor(0,255,0, true);
                 break;
             }
         }
@@ -805,6 +808,14 @@ void DisplayUI::drawClock() {
 }
 
 void DisplayUI::drawWarlord() {
+    int red = random(0,255);
+    int grn = random(0,255);
+    int blu = random(0,255);
+    led.setColor(red,grn,blu, true);
+    
+    int x = random(0,127);
+    int y = random(0,63);
+    drawPixel(x,y);
     
     display.drawString(64, 20, str(D_WARLORD));
 }

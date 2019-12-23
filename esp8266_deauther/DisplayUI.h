@@ -8,6 +8,9 @@
 #include "SSIDs.h"
 #include "Scan.h"
 #include "Attack.h"
+#include "LED.h"
+
+#include "Arduino.h"
 
 #include <SimpleButton.h>
 
@@ -21,6 +24,7 @@ extern Stations     stations;
 extern Scan     scan;
 extern Attack   attack;
 extern uint32_t currentTime;
+extern LED      led;
 
 extern String leftRight(String a, String b, int len);
 extern String center(String a, int len);
