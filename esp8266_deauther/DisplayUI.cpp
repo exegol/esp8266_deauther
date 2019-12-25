@@ -790,10 +790,16 @@ void DisplayUI::drawPacketMonitor() {
 }
 
 void DisplayUI::drawIntro() {
-    drawString(0, center(str(D_INTRO_0), maxLen));
-    drawString(1, center(str(D_INTRO_1), maxLen));
-    drawString(2, center(str(D_INTRO_2), maxLen));
-    drawString(3, center(str(D_INTRO_3), maxLen));
+    display.setFont(ArialMT_Plain_24);
+    display.setTextAlignment(TEXT_ALIGN_CENTER);
+    display.drawString(64, 0, str(D_WARLORD));
+
+    display.setFont(DejaVu_Sans_Mono_12);
+    display.setTextAlignment(TEXT_ALIGN_LEFT);
+    //drawString(0, center(str(D_INTRO_0), maxLen));
+    drawString(2, center(str(D_INTRO_1), maxLen));
+    drawString(3, center(str(D_INTRO_2), maxLen));
+    //drawString(3, center(str(D_INTRO_3), maxLen));
     drawString(4, center(settings.getVersion(), maxLen));
 }
 
